@@ -31,8 +31,6 @@ function writeToFile(data) {
   })
 }
 
-//async function, should return the employee
-//does not need to recurse
 async function createEmployee(employeeType) {
 
   let employee;
@@ -80,8 +78,6 @@ async function createEmployee(employeeType) {
   return employee;
 }
 
-// async function, should return the choice
-//does not need to recurse
 async function askForNextStep() {
   let answer = await inquirer.prompt({
     type: "list",
@@ -96,10 +92,7 @@ async function askForNextStep() {
     return answer.doNext;
   }
 
-//needs while loop with bool finishedBuildingTeam
-//store next employee to be created outside of loop, start with manager
-//update based on below
-//bool is updated based on askForNextStep
+
 async function init() {
   console.log(`Welcome to the Team Profile Generator CLI!`)
   let nextEmpForCreation = 'Manager';

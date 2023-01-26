@@ -1,6 +1,5 @@
 //return string of card HTML for one employee
 function generateCard({ name, id, email, role, specialField }) {
-  //data
   return `<div class="card" style="width: 18rem;">\n
 <div class="card-body">\n
 <h5 class="card-title">${name}</h5>\n
