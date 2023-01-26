@@ -1,6 +1,6 @@
 const Employee = require('../lib/Employee');
 
-describe('Employee Class'), () => {
+describe('Employee Class', () => {
   const demoEmpObj = {name: "Myles", id: "1", email: "test@me.com"};
 
   test('Should create employee from object', () => {
@@ -24,4 +24,4 @@ describe('Employee Class'), () => {
   test('getRole returns generic "employee"', () => {
     expect(newEmp.getRole()).toBe('Employee');
   });
-}
+});
