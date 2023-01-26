@@ -68,9 +68,13 @@ integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CX
 crossorigin="anonymous"></script>\n
 </head>\n
 <body>\n
-<header></header>\n
+<header><nav class="navbar bg-body-tertiary">
+<div class="container-fluid">
+<span class="navbar-brand mb-0 h1">Meet the Team</span>
+</div>
+</nav></header>\n
 <main class="container">\n
-<section class="row">${cards}</section>\n
+<section class="row">${cards.join('')}</section>\n
 </main>\n
 </body>\n
   </html>`
