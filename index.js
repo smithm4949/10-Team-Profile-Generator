@@ -82,7 +82,7 @@ async function askForNextStep() {
     choices: [
       {name: 'Add an engineer to the team', value: 'Engineer'},
       {name: 'Add an intern to the team', value: 'Intern'},
-      {name: 'Exit; finished building team', value: 'Exit'}
+      {name: `Exit program; I'm finished building the team`, value: 'Exit'}
     ]
   })
   if (answers.doNext === 'Exit') {
@@ -96,6 +96,8 @@ async function askForNextStep() {
   }
 
 async function init() {
+  console.log(`Welcome to the Team Profile Generator CLI!\n
+  Please start by adding information about the manager:`)
   let manager = await createEmployee('Manager');
   employees.push(manager);
 
