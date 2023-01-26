@@ -76,4 +76,4 @@ crossorigin="anonymous"></script>\n
   </html>`
 }
 
-export default generateHTML;
+module.exports = generateHTML;
