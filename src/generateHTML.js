@@ -75,3 +75,5 @@ crossorigin="anonymous"></script>\n
 </body>\n
   </html>`
 }
+
+export default generateHTML;
