@@ -1,0 +1,19 @@
+{
+  "name": "10-team-profile-generator",
+  "version": "1.0.0",
+  "description": "Homework for challenge 10 of GWU bootcamp. Generates an html page with cards for employees based on inputs from a CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Myles Smith",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+
+
+}
