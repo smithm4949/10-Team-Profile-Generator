@@ -31,6 +31,8 @@ function writeToFile(data) {
   })
 }
 
+//async function, should return the employee
+//does not need to recurse
 async function createEmployee(employeeType) {
 
   let employee;
@@ -44,7 +46,8 @@ async function createEmployee(employeeType) {
         name: "officeNumber",
         message: "What is their office number?"
         }];
-      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      console.log('-- Please add information about the manager --');
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions]);
       employee = new Manager(answers);
       break;
 
@@ -54,7 +57,8 @@ async function createEmployee(employeeType) {
         name: "github",
         message: "What is their github username?"
         }];
-      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      console.log('-- Please add information about the engineer --');
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions]);
       employee = new Engineer(answers);
       break;
 
@@ -64,18 +68,22 @@ async function createEmployee(employeeType) {
         name: "school",
         message: "What is their school?"
         }];
-      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      console.log('-- Please add information about the intern --');
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions]);
       employee = new Intern(answers);
       break;
 
     default:
       break;
   }
-  return employee
+ 
+  return employee;
 }
 
+// async function, should return the choice
+//does not need to recurse
 async function askForNextStep() {
-  let answers = await inquirer.prompt({
+  let answer = await inquirer.prompt({
     type: "list",
     name: "doNext",
     message: "What would you like to do?",
@@ -85,23 +93,30 @@ async function askForNextStep() {
       {name: `Exit program; I'm finished building the team`, value: 'Exit'}
     ]
   })
-  if (answers.doNext === 'Exit') {
-      //finishedBuildingTeam = true;
-      return;
+    return answer.doNext;
+  }
+
+//needs while loop with bool finishedBuildingTeam
+//store next employee to be created outside of loop, start with manager
+//update based on below
+//bool is updated based on askForNextStep
+async function init() {
+  console.log(`Welcome to the Team Profile Generator CLI!`)
+  let nextEmpForCreation = 'Manager';
+  let finishedBuildingTeam = false;
+
+  while (!finishedBuildingTeam) {
+    let emp = await createEmployee(nextEmpForCreation);
+    employees.push(emp);
+
+    let nextStep = await askForNextStep();
+    if (nextStep === 'Exit') {
+      finishedBuildingTeam = true;
     } else {
-      let emp = await createEmployee(answers.doNext)
-      employees.push(emp);
-      askForNextStep();
+      nextEmpForCreation = nextStep;
     }
   }
 
-async function init() {
-  console.log(`Welcome to the Team Profile Generator CLI!\n
-  Please start by adding information about the manager:`)
-  let manager = await createEmployee('Manager');
-  employees.push(manager);
-
-  askForNextStep();
   writeToFile(generateHTML(employees));
 }
 
