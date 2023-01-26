@@ -12,10 +12,6 @@ function generateCard({ name, id, email, role, specialField }) {
 <a href="mailto:${email}">${email}</a></li>\n
 <li class="list-group-item">${specialField.name} ${specialField.value}</li>\n
 </ul>\n
-<div class="card-body">\n
-<a href="#" class="card-link">Card link</a>\n
-<a href="#" class="card-link">Another link</a>\n
-</div>\n
 </div>`
 }
 
