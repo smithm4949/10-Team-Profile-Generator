@@ -31,10 +31,11 @@ function writeToFile(data) {
   })
 }
 
-function createEmployee(employeeType) {
+async function createEmployee(employeeType) {
 
   let employee;
   let specificQuestions;
+  let answers;
   switch (employeeType) {
 
     case 'Manager':
@@ -43,10 +44,8 @@ function createEmployee(employeeType) {
         name: "officeNumber",
         message: "What is their office number?"
         }];
-      inquirer.prompt([...genericQuestions, ...specificQuestions])
-      .then(answers => {
-        employee = new Manager(answers)  
-      });
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      employee = new Manager(answers);
       break;
 
     case 'Engineer':
@@ -55,10 +54,8 @@ function createEmployee(employeeType) {
         name: "github",
         message: "What is their github username?"
         }];
-      inquirer.prompt([...genericQuestions, ...specificQuestions])
-      .then(answers => {
-        employee = new Engineer(answers)  
-      });
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      employee = new Engineer(answers);
       break;
 
     case 'Intern':
@@ -67,10 +64,8 @@ function createEmployee(employeeType) {
         name: "school",
         message: "What is their school?"
         }];
-      inquirer.prompt([...genericQuestions, ...specificQuestions])
-      .then(answers => {
-        employee = new Intern(answers)  
-      });
+      answers = await inquirer.prompt([...genericQuestions, ...specificQuestions])
+      employee = new Intern(answers);
       break;
 
     default:
@@ -79,8 +74,8 @@ function createEmployee(employeeType) {
   return employee
 }
 
-function askForNextStep() {
-  inquirer.prompt({
+async function askForNextStep() {
+  let answers = await inquirer.prompt({
     type: "list",
     name: "doNext",
     message: "What would you like to do?",
@@ -90,19 +85,19 @@ function askForNextStep() {
       {name: 'Exit; finished building team', value: 'Exit'}
     ]
   })
-  .then(answers => {
-    if (answers.doNext === 'Exit') {
+  if (answers.doNext === 'Exit') {
       //finishedBuildingTeam = true;
       return;
     } else {
-      employees.push(createEmployee(answers.doNext));
+      let emp = await createEmployee(answers.doNext)
+      employees.push(emp);
       askForNextStep();
     }
-  })
-}
+  }
 
-function init() {
-  employees.push(createEmployee('Manager'));
+async function init() {
+  let manager = await createEmployee('Manager');
+  employees.push(manager);
 
   askForNextStep();
   writeToFile(generateHTML(employees));
