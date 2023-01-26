@@ -79,29 +79,32 @@ function createEmployee(employeeType) {
   return employee
 }
 
+function askForNextStep() {
+  inquirer.prompt({
+    type: "list",
+    name: "doNext",
+    message: "What would you like to do?",
+    choices: [
+      {name: 'Add an engineer to the team', value: 'Engineer'},
+      {name: 'Add an intern to the team', value: 'Intern'},
+      {name: 'Exit; finished building team', value: 'Exit'}
+    ]
+  })
+  .then(answers => {
+    if (answers.doNext === 'Exit') {
+      //finishedBuildingTeam = true;
+      return;
+    } else {
+      employees.push(createEmployee(answers.doNext));
+      askForNextStep();
+    }
+  })
+}
+
 function init() {
   employees.push(createEmployee('Manager'));
 
-  let finishedBuildingTeam = false;
-  while (!finishedBuildingTeam) {
-    inquirer.prompt({
-      type: "list",
-      name: "doNext",
-      message: "What would you like to do?",
-      choices: [
-        {name: 'Add an engineer to the team', value: 'Engineer'},
-        {name: 'Add an intern to the team', value: 'Intern'},
-        {name: 'Exit; finished building team', value: 'Exit'}
-      ]
-    })
-    .then(answers => {
-      if (answers.doNext === 'Exit') {
-        finishedBuildingTeam = true;
-      } else {
-        employees.push(createEmployee(answers.doNext));
-      }
-    })
-  }
+  askForNextStep();
   writeToFile(generateHTML(employees));
 }
 
