@@ -9,7 +9,7 @@ function generateCard({ name, id, email, role, specialField }) {
 <li class="list-group-item">ID: ${id}</li>\n
 <li class="list-group-item">Email: 
 <a href="mailto:${email}">${email}</a></li>\n
-<li class="list-group-item">${specialField.name} ${specialField.value}</li>\n
+<li class="list-group-item">${specialField.name}: ${specialField.value}</li>\n
 </ul>\n
 </div>`
 }
