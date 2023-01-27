@@ -10,8 +10,8 @@ This application is not deployed nor hosted and there is no one way for other us
 
 ## Demo
 
-TODO: Add demo link
-A demo of the app can be viewed here: [Team Profile Generator demo](#)
+A demo has been recorded showcasing both the app usage as well as the app passing unit tests, as per required in the challenge readme requirements.
+The demo can be viewed here: [Team Profile Generator demo](https://watch.screencastify.com/v/xda6pk12R6AIZGEZvBNL)
 
 ## Authors and acknowledgment
 
